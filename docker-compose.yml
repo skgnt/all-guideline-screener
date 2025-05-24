@@ -24,4 +24,18 @@ services:
     volumes:
       - .:/app
       - ./backend/db:/app/backend/db
+    env_file:
+      - ./.env
     working_dir: /app/backend
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    env_file:
+      - ./.env
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
